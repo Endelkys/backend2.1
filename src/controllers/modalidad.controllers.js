@@ -1,14 +1,21 @@
+const ModalidadModel = require('../models/modalidadModel');
 
 
 class Modalidad {  // Estos controladores los hace Miguel.
-    agregarModalidad(req, res) { //POST
+    async agregarModalidad(req, res) { //POST
         const datos = req.body;
-        // const verificarRegistroExistente = modalidades.find( modalidad => modalidad.nombreModalidad.toLocaleLowerCase() === datos.nombreModalidad.toLocaleLowerCase() );
+        const comprobarSiExisteModalidad = await ModalidadModel.findOne({nombreModalidad: datos.nombreModalidad});
+        if(comprobarSiExisteModalidad) return res.json({ error: true, mensaje: `La modalidad: '${datos.nombreModalidad}' ya se encuentra registrada`});
 
+        const guardarModalidad = new ModalidadModel(datos);
+        await guardarModalidad.save();
         res.json({mensaje: 'Modalidad agregada con exito.'})
     }
 
-    mostrarModalidades(req, res) { //GET
+    async obtenerModalidades(req, res) { //GET
+        const modalidades = await ModalidadModel.find({});
+
+        return res.json(modalidades)
     }
 
     agregarCategoriaAModalidad(req, res) { // PUT   

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const ModalidadRutas = require('./routes/modalidadRutas');
 
 const app = express();
 app.use(cors());
@@ -10,7 +10,7 @@ app.set('port', 3000); // process.env.PORT || 8080
 
 
 // routes
-// app.use('/api', rutasCampeonato);
+app.use('/api', ModalidadRutas);
 
 
 
