@@ -9,13 +9,18 @@ router.get('/obtener-modalidad', modalidadControllers.obtenerModalidades);
 
 //Rutas con el metodo POST -- Para registrar
 router.post('/registrar-modalidad', modalidadControllers.agregarModalidad);
+router.post('/agregar-categoria', modalidadControllers.agregarCategoriaAModalidad);
 
 
 
 //Rutas con el metodo PUT -- Para editar registros existentes.
+router.put('/editar-categoria', modalidadControllers.editarCategoria);
+
 
 
 //Rutas con el metodo DELETE -- Para eliminar registros.
+router.delete('/eliminar-categoria', modalidadControllers.eliminarCategoria);
+
 
 
 

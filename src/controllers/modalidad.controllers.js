@@ -18,20 +18,34 @@ class Modalidad {  // Estos controladores los hace Miguel.
         return res.json(modalidades)
     }
 
-    agregarCategoriaAModalidad(req, res) { // PUT   
+    async agregarCategoriaAModalidad(req, res) { // POST  
+        const {idModalidad, nombreCategoria} = req.body;
+
+        await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {$push: {'categorias': {nombreCategoria}}});
+
+        res.json({mensaje: 'La categoria fue asignada exitosamente.'})
     }
 
-    editarCategoria(req, res) { // PUT  
+    async editarCategoria(req, res) { 
+        const {idCategoria, nombreEditado} = req.body;
+
+        await ModalidadModel.updateOne({'categorias._id': idCategoria}, {$set: {"categorias.$.nombreCategoria": nombreEditado}}) // Para actualizar un elemento del array de categorias
+        
+        res.json({mensaje: 'La categoria fue editada exitosamente.'})
     }    
       
     //Tercer nuevo controlador
     // Saber cuantos equipos estan participando por categoria y entregar esos resultados de manera descendiente.
-    totalEquiposPorCategoria(req, res) {
+    async totalEquiposPorCategoria(req, res) {
         
     }
     
-    eliminarCategoria(req, res) { // DELETE
-        const { nombreModalidad, nombreCategoria } = req.body;
+    async eliminarCategoria(req, res) { // DELETE
+        const { idCategoria, idModalidad } = req.body;
+
+        await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {$pull: {categorias: {_id: idCategoria}}}) // Para remover un elemento del array de categorias
+        
+        res.json({mensaje: 'La categoria fue eliminada exitosamente.'})
     }
 }
 
