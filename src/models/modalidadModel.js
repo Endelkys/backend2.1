@@ -32,4 +32,4 @@ const ModalidadSchema = new Schema({
     }
 );
 
-module.exports = model('modalidad', ModalidadSchema);
+module.exports = model('Modalidad', ModalidadSchema);
