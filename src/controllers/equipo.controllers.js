@@ -14,6 +14,10 @@ class Equipo {  // Estos controladores los hace Luis.
 
         res.json();
     }
+    // Segundo controlador nuevo agregado
+    totalParticipantesPorEquipo(req, res) { // Saber cuantos participantes tiene cada equipo
+
+    }
 
     removerEquipoDeCategoria(req, res) { 
         const { nombreModalidad, nombreCategoria, nombreEquipo } = req.body; 

@@ -16,6 +16,12 @@ class Modalidad {  // Estos controladores los hace Miguel.
 
     editarCategoria(req, res) { // PUT  
     }    
+      
+    //Tercer nuevo controlador
+    // Saber cuantos equipos estan participando por categoria y entregar esos resultados de manera descendiente.
+    totalEquiposPorCategoria(req, res) {
+        
+    }
     
     eliminarCategoria(req, res) { // DELETE
         const { nombreModalidad, nombreCategoria } = req.body;
