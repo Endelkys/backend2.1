@@ -50,7 +50,15 @@ class Equipo {  // Estos controladores los hace Luis.
     }
 
     async removerEquipoDeCategoria(req, res) { 
-        const { nombreModalidad, nombreCategoria, nombreEquipo } = req.body; 
+        const { idModalidad, nombreCategoria, nombreEquipo } = req.body; 
+        const modalidadEncontrada = await ModalidadModel.findById({_id: idModalidad});
+        
+        const indiceCategoria = modalidadEncontrada.categorias.findIndex(categoria => categoria.nombreCategoria === nombreCategoria); // encontrar el indice de la categoria que se le quiere remover el equipo
+        const equipoRemovido = modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes.filter(equipo => equipo.nombreEquipo !== nombreEquipo); // array sin el equipo removido
+        modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes = equipoRemovido; // ponerle al array 'categorias' los datos sin el equipo removido
+
+        await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {categorias: modalidadEncontrada.categorias}) // removiendo en el documento      
+        res.json({mensaje: `El equipo ${nombreEquipo} ha sido removido de la categoria: ${nombreCategoria}.`});
     }
 
     async eliminarEquipo(req, res) { // Eliminar permanentemente 

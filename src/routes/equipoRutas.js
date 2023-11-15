@@ -13,6 +13,7 @@ router.post('/registrar-equipo', EquipoControllers.registrarEquipo);
 
 //Rutas con el metodo PUT -- Para editar registros existentes.
 router.put('/editar-equipo', EquipoControllers.editarEquipo);
+router.put('/remover-equipo-de-categoria', EquipoControllers.removerEquipoDeCategoria);
 
 
 //Rutas con el metodo DELETE -- Para eliminar registros.
