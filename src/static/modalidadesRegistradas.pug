@@ -1,0 +1,90 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Campeonato Robotica 
+        style.
+            * { 
+                padding: 0; 
+                box-sizing: border-box; 
+                font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                margin: 0;
+            }
+            #header {
+                width: 100%;
+                height: 80px;
+                background-color: #4949c6;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                padding-left: 30px;
+            }     
+            .titlePage {
+                color: #fff;
+                font-size: 32px;
+                text-decoration: none;
+                font-weight: bold;
+            }      
+            .titleContenedor {
+                color: #4949c6;
+                font-size: 35px;
+                margin-bottom: 1.2rem;
+                text-align: center;
+                margin-top: 2rem;
+            }      
+            .modalidades {
+                background-color: #4949c6;
+                width: 70%;
+                height: auto;
+                display: grid;
+                border-radius: 10px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin: auto;
+                align-items: flex-start;
+                padding: 8px;
+            }     
+            .modalidad {
+                color: #4949c6;
+                padding: 8px;
+                background: #fff;
+                border-radius: 10px;
+            }
+            .categoria {
+                margin: 10px 0;
+            }
+
+            .empty { text-align: center; }
+
+            .separar {margin-bottom: 18px; border-bottom: 1px solid #000;}
+
+    body 
+        header#header   
+            .navbar 
+                a.titlePage(href='/') Campeonato Robotica                
+        h2.titleContenedor Modalidades del Campeonato
+        if modalidades.length >= 1
+            .modalidades 
+                each modalidad in modalidades
+                    .modalidad 
+                        h3 Modalidad: #{modalidad.nombreModalidad}
+                        p ID: #{modalidad._id}
+                        if modalidad.categorias.length >= 1
+                            each categoria in modalidad.categorias
+                                .categoria
+                                    p 
+                                        b Categoria: #{categoria.nombreCategoria}
+                                        if categoria.equiposParticipantes.length >= 1
+                                            each equipo in categoria.equiposParticipantes
+                                                p * Nombre equipo: 
+                                                    b #{equipo.nombreEquipo}
+                                                p.separar * Participantes: 
+                                                    b #{equipo.participantes}
+        else    
+            h2.empty No hay modalidades registradas.
+
+
+        
+        
+         
