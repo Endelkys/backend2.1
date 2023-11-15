@@ -27,13 +27,26 @@ class Equipo {  // Estos controladores los hace Luis.
     }
 
     async editarEquipo(req, res) { 
-        const datos = req.body;
+        const {idEquipo, idModalidad, nombreCategoria, nombreEquipo, participantes} = req.body;
 
-        res.json();
+        const datosActualizados = {nombreEquipo, participantes};
+        const datosEquipo = await EquipoModel.findByIdAndUpdate({_id: idEquipo}, datosActualizados);
+
+        //Actualizar equipo en la categoria
+        const modalidadEncontrada = await ModalidadModel.findById({_id: idModalidad});
+        const indiceCategoria = modalidadEncontrada.categorias.findIndex(categoria => categoria.nombreCategoria === nombreCategoria); // encontrar el indice de la categoria que se le quiere editar el equipo
+        const equipoRemovido = modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes.filter(equipo => equipo.nombreEquipo !== datosEquipo.nombreEquipo); // array sin el equipo editado
+        modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes = [...equipoRemovido, datosActualizados]; // ponerle al array 'categorias' los datos que ya tiene sin el actuliazado + los datos del equipo actualizado
+
+        await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {categorias: modalidadEncontrada.categorias}) // actualizar de una modalidad el equipo de una categoria       
+        res.json({mensaje: 'El equipo ha sido actualizado exitosamente.'});
     }
+
     // Segundo controlador nuevo agregado
     async totalParticipantesPorEquipo(req, res) { // Saber cuantos participantes tiene cada equipo
-
+        const equipos = await EquipoModel.find({});
+        const dataTransformada = equipos.map(equipo => ({ nombreEquipo: equipo.nombreEquipo, totalParticipantes: equipo.participantes.split(',').length }))
+        res.json({equipos: dataTransformada}) 
     }
 
     async removerEquipoDeCategoria(req, res) { 
