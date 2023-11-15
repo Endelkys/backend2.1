@@ -5,7 +5,9 @@ const { modalidadControllers } = require("../controllers/modalidad.controllers")
 
 //Rutas con el metodo GET -- Para obtener registros.
 router.get('/obtener-modalidad', modalidadControllers.obtenerModalidades);
-
+//Tercer nuevo endpoint
+// Saber cuantos equipos estan participando por categoria y entregar esos resultados de manera descendiente.
+router.get('/total-equipos-categoria', modalidadControllers.totalEquiposPorCategoria)
 
 //Rutas con el metodo POST -- Para registrar
 router.post('/registrar-modalidad', modalidadControllers.agregarModalidad);

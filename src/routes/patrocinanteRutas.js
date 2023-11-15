@@ -5,7 +5,8 @@ const { PatrocinanteControllers } = require("../controllers/patrocinante.control
 
 //Rutas con el metodo GET -- Para obtener registros.
 router.get('/obtener-patrocinantes', PatrocinanteControllers.obtenerPatrocinantes);
-// "Endpoint para solicitar el total de registrosy que la interfaz se mantenga actualizada".
+//Primer nuevo endpoint
+// "Endpoint para solicitar el total de registros y que la interfaz se mantenga actualizada".
 router.get('/obtener-total-patrocinantes', PatrocinanteControllers.obtenerTotalPatrocinantesRegistrados);
 
 

@@ -5,6 +5,8 @@ const { EquipoControllers } = require("../controllers/equipo.controllers");
 
 //Rutas con el metodo GET -- Para obtener registros.
 router.get('/obtener-equipos', EquipoControllers.obtenerEquipos);
+// Segundo controlador nuevo agregado
+// Saber cuantos participantes tiene cada equipo
 router.get('/total-participantes-por-equipo', EquipoControllers.totalParticipantesPorEquipo);
 
 

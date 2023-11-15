@@ -34,10 +34,23 @@ class Modalidad {  // Estos controladores los hace Miguel.
         res.json({mensaje: 'La categoria fue editada exitosamente.'})
     }    
       
-    //Tercer nuevo controlador
+    //Tercer nuevo endpoint
     // Saber cuantos equipos estan participando por categoria y entregar esos resultados de manera descendiente.
     async totalEquiposPorCategoria(req, res) {
-        
+        const modalidades = await ModalidadModel.find({});
+        const dataTransformada = [];
+
+        modalidades.forEach(modalidad => {
+            for (const categoria of modalidad.categorias) {
+                dataTransformada.push({
+                    modalidad: modalidad.nombreModalidad,
+                    nombreCategoria: categoria.nombreCategoria, 
+                    equiposParticipando: categoria.equiposParticipantes.length
+                })
+            }
+        });
+
+        res.json({data: dataTransformada.sort((a, b) =>  b.equiposParticipando - a.equiposParticipando)}) // datos enviados de manera descendente
     }
     
     async eliminarCategoria(req, res) { // DELETE
