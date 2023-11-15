@@ -22,7 +22,16 @@ const ModalidadSchema = new Schema({
                 type: String,
                 trim: true // Remover los espacios al incio y final del texto recibido
             },
-            equiposParticipantes: [{type: Schema.Types.ObjectId, ref: 'Equipo'}]
+            equiposParticipantes: [{
+                nombreEquipo: {
+                    type: String,
+                    trim: true // Remover los espacios al incio y final del texto recibido
+                },
+                participantes: {
+                    type: String,
+                    trim: true // Remover los espacios al incio y final del texto recibido
+                }
+            }]
         }
     ]
     },
