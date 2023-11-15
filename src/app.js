@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const ModalidadRutas = require('./routes/modalidadRutas');
+const PatrocinanteRutas = require('./routes/patrocinanteRutas');
+
+
 
 const app = express();
 app.use(cors());
@@ -11,7 +14,7 @@ app.set('port', 3000); // process.env.PORT || 8080
 
 // routes
 app.use('/api', ModalidadRutas);
-
+app.use('/api', PatrocinanteRutas);
 
 
 module.exports = app;
