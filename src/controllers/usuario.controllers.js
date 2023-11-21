@@ -1,7 +1,6 @@
 const UsuarioModel = require('../models/usuarioModel');
 const {validarFormUsario} = require('../helpers/validarForms/formulario.usuario')
 const { generarToken } = require('../helpers/generateToken')
-const usuarioModel = require('../models/usuarioModel')
 const { encryptarPassword, compararPassword } = require('../helpers/passwordSecurity')
 
 

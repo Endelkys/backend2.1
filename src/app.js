@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 dotenv.config();
 
 const ModalidadRutas = require('./routes/modalidadRutas');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'pug');
 app.set("views", __dirname + "/static");
 

@@ -24,8 +24,8 @@ const UsuarioSchema = new Schema({
     },
     rol: {
         type: String,
-        enum: ['editor', 'admin'],
-        default: 'editor'
+        enum: ['editor', 'admin', 'usuario'],
+        default: 'usuario'
     },
     token_session: String,
     },  
