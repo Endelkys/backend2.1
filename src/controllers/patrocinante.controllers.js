@@ -1,8 +1,12 @@
+const { validarFormPatrocinante } = require('../helpers/validarForms/formulario.patrocinador')
 const PatrocinanteModel = require('../models/patrocinanteModel');
 
 class Patrocinante {  // Estos controladores los hace Endelkys.
     async registrarPatrocinante(req, res) { // POST
         const datos = req.body;
+        const checkDataRecibida = validarFormPatrocinante(datos.nombrePatrocinador, datos.estadoUbicacion);
+        if(checkDataRecibida.error) return res.json(checkDataRecibida);
+        
         const comprobarSiExistePatrocinante = await PatrocinanteModel.findOne({nombrePatrocinador: datos.nombrePatrocinador});
         if(comprobarSiExistePatrocinante) return res.json({ error: true, mensaje: `El patrocinador: '${datos.nombrePatrocinador}' ya se encuentra registrado`});
 
