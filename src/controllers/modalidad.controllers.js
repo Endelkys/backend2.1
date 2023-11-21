@@ -1,9 +1,13 @@
+const { validarFormModalidad } = require('../helpers/validarForms/formulario.modalidad')
 const ModalidadModel = require('../models/modalidadModel');
 
 
 class Modalidad {  // Estos controladores los hace Miguel.
     async agregarModalidad(req, res) { //POST
         const datos = req.body;
+        const checkDataRecibida = validarFormModalidad(datos.nombreModalidad);
+        if(checkDataRecibida.error) return res.json(checkDataRecibida);
+
         const comprobarSiExisteModalidad = await ModalidadModel.findOne({nombreModalidad: datos.nombreModalidad});
         if(comprobarSiExisteModalidad) return res.json({ error: true, mensaje: `La modalidad: '${datos.nombreModalidad}' ya se encuentra registrada`});
 
