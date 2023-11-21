@@ -14,6 +14,8 @@
 
 - Se crearon los modelos de los datos
 
+- Al registrar un usario, en la contraseña se permite solo letras minusculas y numeros, ya que hay una regex validando esto.
+
 Crear un archivo en la raiz del proyecto llamada .env
 Credenciales que se encuentran el archivo .env
 
