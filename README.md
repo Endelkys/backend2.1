@@ -14,13 +14,15 @@
 
 - Se crearon los modelos de los datos
 
-LOS 3 ENDPOINTS ADICIONALES QUE SE AGREGARON FUERON:
+Crear un archivo en la raiz del proyecto llamada .env
+Credenciales que se encuentran el archivo .env
 
-1) /obtener-total-patrocinantes => "Endpoint para solicitar el total de registros de patrocinantes y que la interfaz se mantenga actualizada".
 
-2) /total-participantes-por-equipo => Endpoint para saber cuantos participantes tiene cada equipo
-
-3) /total-equipos-categoria => Saber cuantos equipos estan participando por categoria y se entregan esos resultados de manera descendiente.
+PORT=3000
+DB_URI=mongodb+srv://Endelkys:secretkey@cluster0.qvkhdnd.mongodb.net/?retryWrites=true&w=majority
+USER_DB=Endelkys    
+PASSWORD_DB=secretkey
+SIGN_TOKEN=255393a4-aea4-e4b11fd80$2b$10$rnmX8lfseNvHytN1Q3s0z.SGU.nmnpNFEb/L4u72Zv5bB91mM/jMKc2df6080aa2d1d6e1e4e9484029-bb92
 
 
 

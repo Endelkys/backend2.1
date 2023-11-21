@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const ModalidadRutas = require('./routes/modalidadRutas');
 const PatrocinanteRutas = require('./routes/patrocinanteRutas');
 const EquipoRutas = require('./routes/equipoRutas');
@@ -11,7 +14,7 @@ app.use(cors());
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
 
-app.set('port', 3000); // process.env.PORT || 8080
+app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'pug');
 app.set("views", __dirname + "/static");
 
