@@ -2,14 +2,14 @@ const UsuarioModel = require('../models/usuarioModel');
 const {validarFormUsario} = require('../helpers/validarForms/formulario.usuario')
 const { generarToken } = require('../helpers/generateToken')
 const usuarioModel = require('../models/usuarioModel')
-const { encryptarPassword } = require('../helpers/passwordSecurity')
+const { encryptarPassword, compararPassword } = require('../helpers/passwordSecurity')
 
 
 class Usuario {  // Estos controladores los hace Endelkys.
     async registrarUsuario(req, res) { // POST
         const datosUsario = req.body;
-        const respuestError = validarFormUsario(datosUsario);
-        if(respuestError.error) return res.json(respuestError)
+        const respuestaError = validarFormUsario(datosUsario);
+        if(respuestaError.error) return res.json(respuestaError);
 
         const checkExistingAccount = await UsuarioModel.findOne({email: datosUsario.email});
         if(checkExistingAccount) return res.json({error: true, msg: 'El correo ya se encuentra en uso, prueba uno diferente.'})
@@ -32,8 +32,23 @@ class Usuario {  // Estos controladores los hace Endelkys.
     }
 
     async iniciarSesion(req, res) { // POST
+        const datosUsario = req.body;
+        const checkExistingAccount = await UsuarioModel.findOne({email: datosUsario.email});
+        if(!checkExistingAccount) return res.json({error: true, msg: 'Credenciales incorrectas.'});
 
-        res.json({})
+        const matchPasswords = await compararPassword(datosUsario.password, checkExistingAccount.password); // comprobar si coinciden las claves
+        if(!matchPasswords) return res.json({error: true, msg: 'Credenciales incorrectas.'});
+
+        const token = generarToken(checkExistingAccount._id, checkExistingAccount.rol); // generar token
+        await UsuarioModel.findByIdAndUpdate({_id: checkExistingAccount._id}, { $set: { token_session: token } });
+
+        res.json({        
+            logeado: true,
+            rol: checkExistingAccount.rol,
+            email: checkExistingAccount.email,
+            token,
+            idUsario: checkExistingAccount._id
+        })
     }
 }
 
