@@ -1,9 +1,12 @@
+const { validarFormEquipo } = require('../helpers/validarForms/formulario.equipo')
 const EquipoModel = require('../models/equipoModel');
 const ModalidadModel = require('../models/modalidadModel');
 
 class Equipo {  // Estos controladores los hace Luis.
     async registrarEquipo(req, res) {
         const { idModalidad, nombreCategoria, nombreEquipo, participantes } = req.body;
+        const checkDataRecibida = validarFormEquipo(idModalidad, nombreCategoria, nombreEquipo, participantes);
+        if(checkDataRecibida.error) return res.json(checkDataRecibida);
         const equipo = {nombreEquipo, participantes};
 
         const comprobarSiExisteEquipo = await EquipoModel.findOne({nombreEquipo});
