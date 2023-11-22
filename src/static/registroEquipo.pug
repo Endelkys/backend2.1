@@ -19,7 +19,30 @@ html(lang="en")
                 display: flex;
                 align-items: center;
                 padding-left: 30px;
-            }     
+            }
+            .navbar {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .containerRight {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                margin-right: 30px;
+            }
+            .containerRight > button {
+                padding: 5px;
+                background: #fff;
+                border: none;
+                border-radius: 15px;
+                transition: background .3s ease;
+                cursor: pointer;
+            }
+            .containerRight > button:hover {
+                background: #babaf0;
+            }      
             .titlePage {
                 color: #fff;
                 font-size: 32px;
@@ -62,12 +85,19 @@ html(lang="en")
                 cursor: pointer;
                 font-weight: 500;
             }
-
+        
+        script(type='text/javascript').
+            const checkRol = JSON.parse(localStorage.getItem('usuario'));
+            console.log('regisgtro team',checkRol)
 
     body 
         header#header   
             .navbar 
-                a.titlePage(href='/') Campeonato Robotica                
+                a.titlePage(href='/') Campeonato Robotica
+                .containerRight
+                    p   Bienvenido 
+                        script document.write(checkRol.nombre)
+                    button#logoutBtn Cerrar sesion          
         h2.titleContenedor Registrar Equipo
         form(action='http://localhost:3000/api/registrar-equipo' method='post' target='_blank')
             input#POST-name(type='text' name='nombreEquipo' placeholder="Ingrese nombre del Equipo")
@@ -76,5 +106,6 @@ html(lang="en")
             input#POST-name(type='text' name='idModalidad' placeholder="Ingrese ID de la Modalidad a asignar")            
 
             button Guardar
+        script(src="./js/logout.js")
         
          

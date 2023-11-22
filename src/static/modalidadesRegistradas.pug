@@ -19,7 +19,30 @@ html(lang="en")
                 display: flex;
                 align-items: center;
                 padding-left: 30px;
-            }     
+            }   
+            .navbar {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
+             .containerRight {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                margin-right: 30px;
+            }
+            .containerRight > button {
+                padding: 5px;
+                background: #fff;
+                border: none;
+                border-radius: 15px;
+                transition: background .3s ease;
+                cursor: pointer;
+            }
+            .containerRight > button:hover {
+                background: #babaf0;
+            }  
             .titlePage {
                 color: #fff;
                 font-size: 32px;
@@ -58,11 +81,17 @@ html(lang="en")
             .empty { text-align: center; }
 
             .separar {margin-bottom: 18px; border-bottom: 1px solid #000;}
-
+        script(type='text/javascript').
+            const checkRol = JSON.parse(localStorage.getItem('usuario'));
+            console.log('modalidades page',checkRol)
     body 
         header#header   
             .navbar 
-                a.titlePage(href='/') Campeonato Robotica                
+                a.titlePage(href='/') Campeonato Robotica    
+                .containerRight
+                    p   Bienvenido 
+                        script document.write(checkRol.nombre)
+                    button#logoutBtn Cerrar sesion            
         h2.titleContenedor Modalidades del Campeonato
         if modalidades.length >= 1
             .modalidades 
@@ -83,6 +112,9 @@ html(lang="en")
                                                     b #{equipo.participantes}
         else    
             h2.empty No hay modalidades registradas.
+        
+        script(src="./js/logout.js")
+
 
 
         
