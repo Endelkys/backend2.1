@@ -63,10 +63,10 @@ html(lang="en")
                 background-color: #4949c6;
                 color: #fff;
             }
-        script //window.location.replace('/registro-modalidad')
+        script 
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
-            console.log(checkRol)
+            if(!checkRol?.logeado) window.location.replace('/login');
 
     body 
         header#header   

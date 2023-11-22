@@ -81,7 +81,8 @@ html(lang="en")
 
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
-            console.log('patrociandor',checkRol)
+            if(!checkRol?.logeado) window.location.replace('/login');
+
 
     body 
         header#header   

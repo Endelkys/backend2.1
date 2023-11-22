@@ -83,7 +83,8 @@ html(lang="en")
             .separar {margin-bottom: 18px; border-bottom: 1px solid #000;}
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
-            console.log('modalidades page',checkRol)
+            if(!checkRol?.logeado) window.location.replace('/login');
+
     body 
         header#header   
             .navbar 

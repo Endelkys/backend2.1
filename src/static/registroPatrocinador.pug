@@ -87,7 +87,8 @@ html(lang="en")
             }
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
-            console.log('regisgtro patrocinador',checkRol)
+            if(!checkRol?.logeado) window.location.replace('/login');
+
 
     body 
         header#header   
