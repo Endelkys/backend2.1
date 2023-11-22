@@ -101,10 +101,10 @@ html(lang="en")
                     button#logoutBtn Cerrar sesion          
         h2.titleContenedor Registrar Equipo
         form(action='http://localhost:3000/api/registrar-equipo' method='post' target='_blank')
-            input#POST-name(type='text' name='nombreEquipo' placeholder="Ingrese nombre del Equipo")
-            input#POST-name(type='text' name='participantes' placeholder="Nombres de los participantes: Maria, Jose,...")
-            input#POST-name(type='text' name='nombreCategoria' placeholder="Ingrese nombre de la Categoria a asignar")
-            input#POST-name(type='text' name='idModalidad' placeholder="Ingrese ID de la Modalidad a asignar")            
+            input#POST-name(type='text' required name='nombreEquipo' placeholder="Ingrese nombre del Equipo")
+            input#POST-name(type='text' required name='participantes' placeholder="Nombres de los participantes: Maria, Jose,...")
+            input#POST-name(type='text' required name='nombreCategoria' placeholder="Ingrese nombre de la Categoria a asignar")
+            input#POST-name(type='text' required name='idModalidad' placeholder="Ingrese ID de la Modalidad a asignar")            
 
             button Guardar
         script(src="./js/logout.js")

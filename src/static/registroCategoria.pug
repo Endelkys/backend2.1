@@ -100,8 +100,8 @@ html(lang="en")
                     button#logoutBtn Cerrar sesion                
         h2.titleContenedor Registrar Categoria 
         form(action='http://localhost:3000/api/agregar-categoria' method='post' target='_blank')
-            input#POST-name(type='text' name='nombreCategoria' placeholder="Ingrese nombre de la Categoria")
-            input#POST-name(type='text' name='idModalidad' placeholder="Ingrese ID de la Modalidad a asignar")            
+            input#POST-name(type='text' required name='nombreCategoria' placeholder="Ingrese nombre de la Categoria")
+            input#POST-name(type='text' required name='idModalidad' placeholder="Ingrese ID de la Modalidad a asignar")            
 
             button Guardar
         script(src="./js/logout.js")

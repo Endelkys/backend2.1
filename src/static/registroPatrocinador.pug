@@ -101,8 +101,8 @@ html(lang="en")
                     button#logoutBtn Cerrar sesion                 
         h2.titleContenedor Registrar Patrocinador
         form(action='http://localhost:3000/api/registrar-patrocinante' method='post' target='_blank')
-            input#POST-name(type='text' name='nombrePatrocinador' placeholder="Ingrese nombre del Patrocinador")
-            input#POST-name(type='text' name='estadoUbicacion' placeholder="Ubicacion: Trujilo, Valera, plata 3")           
+            input#POST-name(type='text' required name='nombrePatrocinador' placeholder="Ingrese nombre del Patrocinador")
+            input#POST-name(type='text' required name='estadoUbicacion' placeholder="Ubicacion: Trujilo, Valera, plata 3")           
 
             button Guardar
         script(src="./js/logout.js")

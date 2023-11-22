@@ -101,7 +101,7 @@ html(lang="en")
                     button#logoutBtn Cerrar sesion             
         h2.titleContenedor Registrar Modalidad
         form(action='http://localhost:3000/api/registrar-modalidad' method='post' target='_blank')
-            input#POST-name(type='text' name='nombreModalidad' placeholder="Ingrese nombre de la Modalidad")
+            input#POST-name(type='text' required name='nombreModalidad' placeholder="Ingrese nombre de la Modalidad")
             button Guardar
 
         script(src="./js/logout.js")
