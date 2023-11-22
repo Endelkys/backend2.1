@@ -11,6 +11,16 @@ router.get('/', (req, res) => { // Pagina principal
     res.render('home');
 });
 
+router.get('/login', (req, res) => { // Pagina principal
+    res.setHeader('Content-Type', 'text/html');
+    res.render('login');
+});
+
+router.get('/registrarse', (req, res) => { // Pagina principal
+    res.setHeader('Content-Type', 'text/html');
+    res.render('registrarse');
+});
+
 router.get('/registro-modalidad', (req, res) => { // Pagina principal
     res.setHeader('Content-Type', 'text/html');
     res.render('registroModalidad');

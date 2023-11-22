@@ -6,7 +6,7 @@ const { verificarToken } = require("../middlewares/authToken")
 
 
 //Rutas con el metodo GET -- Para obtener registros.
-router.get('/obtener-modalidad', [verificarToken, rolesConAcceso(['admin', 'editor', 'usuario'])], modalidadControllers.obtenerModalidades);
+router.get('/obtener-modalidad', modalidadControllers.obtenerModalidades);
 //Tercer nuevo endpoint
 // Saber cuantos equipos estan participando por categoria y entregar esos resultados de manera descendiente.
 router.get('/total-equipos-categoria',[verificarToken, rolesConAcceso(['admin', 'editor', 'usuario'])], modalidadControllers.totalEquiposPorCategoria)

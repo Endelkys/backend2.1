@@ -26,7 +26,8 @@ class Usuario {  // Estos controladores los hace Endelkys.
             rol: crearRegistro.rol,
             email: crearRegistro.email,
             token: crearRegistro.token_session,
-            idUsario: crearRegistro._id
+            idUsario: crearRegistro._id,
+            nombre: `${crearRegistro.nombre} ${crearRegistro.apellido}`
         })
     }
 
@@ -46,7 +47,8 @@ class Usuario {  // Estos controladores los hace Endelkys.
             rol: checkExistingAccount.rol,
             email: checkExistingAccount.email,
             token,
-            idUsario: checkExistingAccount._id
+            idUsario: checkExistingAccount._id,
+            nombre: `${checkExistingAccount.nombre} ${checkExistingAccount.apellido}`
         })
     }
 }

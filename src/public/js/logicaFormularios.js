@@ -1,6 +1,9 @@
 const formUsuario = document.getElementById('registrarUsuario');
-formUsuario && formUsuario.addEventListener('submit', registrarUsuario);
+const loginForm = document.getElementById('loginForm');
 
+
+formUsuario && formUsuario.addEventListener('submit', registrarUsuario);
+loginForm && loginForm.addEventListener('submit', LoginFunction);
 
 function requestSettings (dataForm, token = '', method = 'POST') {
     return {
@@ -32,10 +35,31 @@ function obtenerValuesFormUsuario () {
     }
 }
 
+function obtenerValuesFormLogin () {    
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+
+    return {
+        password,
+        email
+    }
+}
+
 async function registrarUsuario (e) {
     e.preventDefault();
     const resp = await fetch('http://localhost:3000/api/registrar-usuario', requestSettings(obtenerValuesFormUsuario()));
     const {mensaje, msg, error, ...restDatos} = await resp.json()
+
+    if(error) return window.alert(msg);
+
+    localStorage.setItem('usuario', JSON.stringify(restDatos));
+    window.location.href = `/`;
+}
+
+async function LoginFunction (e) {
+    e.preventDefault();
+    const resp = await fetch('http://localhost:3000/api/iniciar-sesion', requestSettings(obtenerValuesFormLogin()));
+    const {msg, error, ...restDatos} = await resp.json();
 
     if(error) return window.alert(msg);
 

@@ -20,6 +20,29 @@ html(lang="en")
                 align-items: center;
                 padding-left: 30px;
             }
+            .navbar {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .containerRight {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                margin-right: 30px;
+            }
+            .containerRight > button {
+                padding: 5px;
+                background: #fff;
+                border: none;
+                border-radius: 15px;
+                transition: background .3s ease;
+                cursor: pointer;
+            }
+            .containerRight > button:hover {
+                background: #babaf0;
+            }
             .enlacesContenedor {
                 display: flex;
                 flex-direction: column;
@@ -40,12 +63,19 @@ html(lang="en")
                 background-color: #4949c6;
                 color: #fff;
             }
-        script //window.location.replace('/registro-modalidad');
+        script //window.location.replace('/registro-modalidad')
+        script(type='text/javascript').
+            const checkRol = JSON.parse(localStorage.getItem('usuario'));
+            console.log(checkRol)
 
     body 
         header#header   
             .navbar 
                 h1.titlePage Campeonato Robotica
+                .containerRight
+                    p   Bienvenido 
+                        script document.write(checkRol.nombre)
+                    button#logoutBtn Cerrar sesion
         .enlacesContenedor
             h2.titleContenedor Registros
             .enlaces 
@@ -59,3 +89,6 @@ html(lang="en")
             .enlaces 
                 a(href='modalidades') Modalidades Registradas
                 a(href='patrocinadores') Patrocinadores Registrados
+
+        script(src="./js/logout.js")
+
