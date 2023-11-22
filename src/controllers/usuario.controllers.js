@@ -51,6 +51,13 @@ class Usuario {  // Estos controladores los hace Endelkys.
             nombre: `${checkExistingAccount.nombre} ${checkExistingAccount.apellido}`
         })
     }
+
+    async cerrarSesion(req, res) { // POST
+        const _id = req.params.id;
+        await UsuarioModel.findByIdAndUpdate({_id}, { $set: { token_session: '' }}) // remover el token.
+
+        res.json({msg: 'Sesión cerrada con éxito.'})
+    }
 }
 
 const usuarioControllers = new Usuario();
