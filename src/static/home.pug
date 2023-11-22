@@ -79,10 +79,10 @@ html(lang="en")
         .enlacesContenedor
             h2.titleContenedor Registros
             .enlaces 
-                a(href='registro-modalidad') Registrar Modalidad
-                a(href='registro-categoria') Registrar Categoria
+                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-modalidad'>Registrar Modalidad</a>`)
+                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-categoria'>Registrar Categoria</a>`)
                 a(href='registro-equipo') Registrar Equipo 
-                a(href='registro-patrocinador') Registrar Patrocinador
+                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-patrocinador'>Registrar Patrocinador</a>`)
         
         .enlacesContenedor
             h2.titleContenedor Contenido

@@ -88,6 +88,7 @@ html(lang="en")
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
             if(!checkRol?.logeado) window.location.replace('/login');
+            if(checkRol?.rol !== 'admin') window.location.replace('/');
 
     body 
         header#header   
