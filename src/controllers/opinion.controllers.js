@@ -22,9 +22,9 @@ class Opinion {
     }
 
     async eliminarOpinion(req, res) { // GET
-        const id = req.params.id;
-        const apuestas = await OpinionModel.find({equipoId: id}).populate({path: 'equipoId', select: 'nombreEquipo participantes'}).populate({path: 'usuarioId', select: 'email nombre apellido'});
-        res.json({totalApuestas: apuestas.length, apuestas})
+        const _id = req.params.id;
+        await OpinionModel.findByIdAndDelete({_id});
+        res.json({mensaje: 'La opinión ha sido eliminada exitosamente.'})
     }
 }
 

@@ -6,7 +6,7 @@ const { rolesConAcceso } = require("../middlewares/validarRoles")
 
 
 //Rutas con el metodo GET -- Para obtener registros.
-router.get('/obtener-opiniones', [verificarToken, rolesConAcceso(['admin', 'editor', 'usuario'])], OpinionControllers.obtenerOpiniones);
+router.get('/obtener-opiniones', OpinionControllers.obtenerOpiniones);
 
 
 //Rutas con el metodo POST -- Para registrar
