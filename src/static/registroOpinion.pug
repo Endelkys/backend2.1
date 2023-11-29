@@ -42,56 +42,69 @@ html(lang="en")
             }
             .containerRight > button:hover {
                 background: #babaf0;
-            }
-            .enlacesContenedor {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin-top: 2rem;
-            }
+            }      
+            .titlePage {
+                color: #fff;
+                font-size: 32px;
+                text-decoration: none;
+                font-weight: bold;
+            }      
             .titleContenedor {
                 color: #4949c6;
                 font-size: 35px;
                 margin-bottom: 1.2rem;
+                text-align: center;
+                margin-top: 2rem;
             }
-            .enlaces > a {
-                text-decoration: none;
-                margin-right: 8px;
-                border-radius: 8px;
-                padding: 10px;
+            form {
+                width: 450px;
+                padding: 8px;
                 background-color: #4949c6;
-                color: #fff;
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: auto;                
             }
-        script 
+            form > input {
+                outline: none;
+                padding: 12px;
+                width: 310px;
+                border: none;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+            }
+
+            form > button {
+                outline: none;
+                padding: 8px;
+                width: 120px;
+                border: none;
+                border-radius: 8px;
+                color:  #4949c6;
+                cursor: pointer;
+                font-weight: 500;
+            }
+        
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
             if(!checkRol?.logeado) window.location.replace('/login');
 
+
     body 
         header#header   
             .navbar 
-                h1.titlePage Campeonato Robotica
+                a.titlePage(href='/') Campeonato Robotica
                 .containerRight
                     p   Bienvenido 
                         script document.write(checkRol.nombre)
-                    button#logoutBtn Cerrar sesion
-        .enlacesContenedor
-            h2.titleContenedor Registros
-            .enlaces 
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-modalidad'>Registrar Modalidad</a>`)
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-categoria'>Registrar Categoria</a>`)
-                a(href='registro-equipo') Registrar Equipo 
-                a(href='crear-apuesta') Crear Apuesta 
-                a(href='crear-opinion') Crear Opinión
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-patrocinador'>Registrar Patrocinador</a>`)
-
-        .enlacesContenedor
-            h2.titleContenedor Contenido
-            .enlaces 
-                a(href='modalidades') Modalidades Registradas
-                a(href='patrocinadores') Patrocinadores Registrados
-                 a(href='equipos') Equipos Registrados
-
-        script(src="./js/logout.js")
-
+                    button#logoutBtn Cerrar sesion          
+        h2.titleContenedor Agregar Opinión
+        form#registrarOpinion
+            input(type='text' id="opinion" required name='opinion' placeholder="Qué opinas del torneo ?")
+            input(type='text' id="expectativa" required name='expectativa' placeholder="Qué expectativa tenías del torneo ?")
+            input(type='number' min="1" max="10" id="puntuacion" required name='puntuacion' placeholder="Del 1 al 10 cómo calificas el torneo ?")
+            button Guardar
+        script(src="./js/logicaFormularios.js")
+        
+         

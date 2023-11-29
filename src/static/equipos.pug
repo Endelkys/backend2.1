@@ -19,7 +19,7 @@ html(lang="en")
                 display: flex;
                 align-items: center;
                 padding-left: 30px;
-            }
+            } 
             .navbar {
                 display: flex;
                 width: 100%;
@@ -42,56 +42,70 @@ html(lang="en")
             }
             .containerRight > button:hover {
                 background: #babaf0;
-            }
-            .enlacesContenedor {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin-top: 2rem;
-            }
+            }    
+            .titlePage {
+                color: #fff;
+                font-size: 32px;
+                text-decoration: none;
+                font-weight: bold;
+            }      
             .titleContenedor {
                 color: #4949c6;
                 font-size: 35px;
                 margin-bottom: 1.2rem;
-            }
-            .enlaces > a {
-                text-decoration: none;
-                margin-right: 8px;
-                border-radius: 8px;
-                padding: 10px;
+                text-align: center;
+                margin-top: 2rem;
+            }      
+            .modalidades {
                 background-color: #4949c6;
-                color: #fff;
+                width: 70%;
+                height: 125px;
+                display: grid;
+                border-radius: 10px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin: auto;
+                padding: 8px;
+            }     
+            .modalidad {
+                color: #4949c6;
+                padding: 8px;
+                background: #fff;
+                border-radius: 10px;
             }
-        script 
+            .categoria {
+                margin: 10px 0;
+            }
+
+            .empty { text-align: center; }
+
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
             if(!checkRol?.logeado) window.location.replace('/login');
 
+
     body 
         header#header   
             .navbar 
-                h1.titlePage Campeonato Robotica
+                a.titlePage(href='/') Campeonato Robotica    
                 .containerRight
                     p   Bienvenido 
                         script document.write(checkRol.nombre)
-                    button#logoutBtn Cerrar sesion
-        .enlacesContenedor
-            h2.titleContenedor Registros
-            .enlaces 
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-modalidad'>Registrar Modalidad</a>`)
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-categoria'>Registrar Categoria</a>`)
-                a(href='registro-equipo') Registrar Equipo 
-                a(href='crear-apuesta') Crear Apuesta 
-                a(href='crear-opinion') Crear Opinión
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-patrocinador'>Registrar Patrocinador</a>`)
-
-        .enlacesContenedor
-            h2.titleContenedor Contenido
-            .enlaces 
-                a(href='modalidades') Modalidades Registradas
-                a(href='patrocinadores') Patrocinadores Registrados
-                 a(href='equipos') Equipos Registrados
-
+                    button#logoutBtn Cerrar sesion            
+        h2.titleContenedor Equipos del Campeonato
+        if equiposAparticipar.length >= 1
+            .modalidades 
+                each equipo in equiposAparticipar
+                    .modalidad 
+                        h3 Equipo: #{equipo.nombreEquipo}
+                        p Participantes: #{equipo.participantes}
+                        
+        else    
+            h2.empty No hay equipos registrados.
         script(src="./js/logout.js")
 
+
+
+        
+        
+         

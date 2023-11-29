@@ -1,11 +1,13 @@
 const formUsuario = document.getElementById('registrarUsuario');
 const loginForm = document.getElementById('loginForm');
 const registrarApuesta = document.getElementById('registrarApuesta');
+const registrarOpinion = document.getElementById('registrarOpinion');
+
 
 formUsuario && formUsuario.addEventListener('submit', registrarUsuario);
 loginForm && loginForm.addEventListener('submit', LoginFunction);
 registrarApuesta && registrarApuesta.addEventListener('submit', registrarApuestaFuncion);
-
+registrarOpinion && registrarOpinion.addEventListener('submit', registrarOpinionFuncion);
 
 function requestSettings (dataForm, token = '', method = 'POST') {
     return {
@@ -59,6 +61,22 @@ function obtenerValuesFormApuesta () {
     }
 }
 
+
+function obtenerValuesFormOpinion () {    
+    const opinion = document.getElementById('opinion').value;
+    const expectativa = document.getElementById('expectativa').value;
+    const puntuacion = document.getElementById('puntuacion').value;
+
+    return {
+        opinion,
+        puntuacion,
+        expectativa
+    }
+}
+
+
+// Formularios
+
 async function registrarUsuario (e) {
     e.preventDefault();
     const resp = await fetch('http://localhost:3000/api/registrar-usuario', requestSettings(obtenerValuesFormUsuario()));
@@ -90,3 +108,12 @@ async function registrarApuestaFuncion (e) {
     window.location.href = `/`;
 }
 
+async function registrarOpinionFuncion (e) {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('usuario'))?.token;
+    const resp = await fetch('http://localhost:3000/api/registrar-opinion', requestSettings(obtenerValuesFormOpinion(), token));
+    const {mensaje, error} = await resp.json();
+
+    if(error) return window.alert(mensaje);
+    window.location.href = `/`;
+}

@@ -36,6 +36,11 @@ router.get('/crear-apuesta', (req, res) => {
     res.render('registroApuesta');
 });
 
+router.get('/crear-opinion', (req, res) => {
+    res.setHeader('Content-Type', 'text/html');
+    res.render('registroOpinion');
+});
+
 router.get('/registro-equipo', (req, res) => { 
     res.setHeader('Content-Type', 'text/html');
     res.render('registroEquipo');
@@ -56,6 +61,12 @@ router.get('/patrocinadores', async(req, res) => {
     const {data} = await axios.get('http://localhost:3000/api/obtener-patrocinantes');
     res.setHeader('Content-Type', 'text/html');
     res.render('patrocinadores', {patrocinantes: data.patrocinantes});
+});
+
+router.get('/equipos', async(req, res) => { 
+    const {data} = await axios.get('http://localhost:3000/api/obtener-equipos');
+    res.setHeader('Content-Type', 'text/html');
+    res.render('equipos', {equiposAparticipar: data.equiposAparticipar});
 });
 
 

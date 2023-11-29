@@ -6,7 +6,7 @@ const { rolesConAcceso } = require("../middlewares/validarRoles")
 
 
 //Rutas con el metodo GET -- Para obtener registros.
-router.get('/obtener-equipos', [verificarToken, rolesConAcceso(['admin', 'editor', 'usuario'])], EquipoControllers.obtenerEquipos);
+router.get('/obtener-equipos', EquipoControllers.obtenerEquipos);
 // Segundo controlador nuevo agregado
 // Saber cuantos participantes tiene cada equipo
 router.get('/total-participantes-por-equipo', [verificarToken, rolesConAcceso(['admin', 'editor', 'usuario'])], EquipoControllers.totalParticipantesPorEquipo);

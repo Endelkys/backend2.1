@@ -7,6 +7,7 @@ const OpinionModel = require('../models/opinionModel');
 class Opinion {
     async registrarOpinion(req, res) { // POST
         const datosOpinion = req.body;
+        datosOpinion.usuarioId = req.id;
         const respuestaError = validarFormOpinion(datosOpinion);
         if(respuestaError.error) return res.json(respuestaError);
 
