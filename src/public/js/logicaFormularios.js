@@ -1,9 +1,11 @@
 const formUsuario = document.getElementById('registrarUsuario');
 const loginForm = document.getElementById('loginForm');
-
+const registrarApuesta = document.getElementById('registrarApuesta');
 
 formUsuario && formUsuario.addEventListener('submit', registrarUsuario);
 loginForm && loginForm.addEventListener('submit', LoginFunction);
+registrarApuesta && registrarApuesta.addEventListener('submit', registrarApuestaFuncion);
+
 
 function requestSettings (dataForm, token = '', method = 'POST') {
     return {
@@ -45,6 +47,18 @@ function obtenerValuesFormLogin () {
     }
 }
 
+function obtenerValuesFormApuesta () {    
+    const nombreModalidad = document.getElementById('nombreModalidad').value;
+    const nombreCategoria = document.getElementById('nombreCategoria').value;
+    const nombreEquipo = document.getElementById('nombreEquipo').value;
+
+    return {
+        nombreModalidad,
+        nombreCategoria,
+        nombreEquipo: nombreEquipo.trim()
+    }
+}
+
 async function registrarUsuario (e) {
     e.preventDefault();
     const resp = await fetch('http://localhost:3000/api/registrar-usuario', requestSettings(obtenerValuesFormUsuario()));
@@ -65,3 +79,14 @@ async function LoginFunction (e) {
     localStorage.setItem('usuario', JSON.stringify(restDatos));
     window.location.href = `/`;
 }
+
+async function registrarApuestaFuncion (e) {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('usuario'))?.token;
+    const resp = await fetch('http://localhost:3000/api/crear-apuesta', requestSettings(obtenerValuesFormApuesta(), token));
+    const {mensaje, error} = await resp.json();
+
+    if(error) return window.alert(mensaje);
+    window.location.href = `/`;
+}
+

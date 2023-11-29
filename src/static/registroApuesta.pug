@@ -78,7 +78,7 @@ html(lang="en")
             form > button {
                 outline: none;
                 padding: 8px;
-                width: 90px;
+                width: 120px;
                 border: none;
                 border-radius: 8px;
                 color:  #4949c6;
@@ -100,11 +100,11 @@ html(lang="en")
                         script document.write(checkRol.nombre)
                     button#logoutBtn Cerrar sesion          
         h2.titleContenedor Crear apuesta
-        form(action='http://localhost:3000/api/registrar-equipo' method='post' target='_blank')
-            input#POST-name(type='text' required name='nombreModalidad' placeholder="A qué modalidad pertenece tu equipo favorito")
-            input#POST-name(type='text' required name='nombreCategoria' placeholder="A qué categoria pertenece tu equipo favorito")
-            input#POST-name(type='text' required name='nombreEquipo' placeholder="Ingresa el nombre del equipo ganador")
+        form#registrarApuesta
+            input(type='text' id="nombreModalidad" required name='nombreModalidad' placeholder="A qué modalidad pertenece tu equipo favorito")
+            input(type='text' id="nombreCategoria" required name='nombreCategoria' placeholder="A qué categoria pertenece tu equipo favorito")
+            input(type='text' id="nombreEquipo" required name='nombreEquipo' placeholder="Ingresa el nombre del equipo ganador")
             button Crear apuesta
-        script(src="./js/logout.js")
+        script(src="./js/logicaFormularios.js")
         
          

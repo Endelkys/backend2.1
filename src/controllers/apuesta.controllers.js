@@ -9,7 +9,7 @@ class Apuesta {
         const datosApuesta = req.body;
         datosApuesta.usuarioId = req.id;
 
-        const equipo = await EquipoModel.findOne({nombreEquipo: datos.nombreEquipo});
+        const equipo = await EquipoModel.findOne({nombreEquipo: datosApuesta.nombreEquipo});
 
         if(!equipo) return res.json({error: true, mensaje: 'Error: Equipo no encontrado!'})
         datosApuesta.equipoId = equipo._id
@@ -23,7 +23,7 @@ class Apuesta {
         await registrarAccion({
             metodoAccion: 'POST',
             ruta: 'api/crear-apuesta',
-            descripcionAccion: `Registro de apuesta.`,
+            descripcionAccion: `Registro de apuesta, se apostó al equipo: ${datosApuesta.nombreEquipo}`,
             usuarioId: req.id
         });
         res.json({mensaje: 'La apuesta ha sido registrada con éxito, te deseamos suerte!'})
