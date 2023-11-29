@@ -17,8 +17,8 @@ class Opinion {
 
 
     async obtenerOpiniones(req, res) { // GET
-        const apuestas = await OpinionModel.find({}).populate({path: 'equipoId'}).populate({path: 'usuarioId', select: 'email nombre apellido'});
-        res.json({totalApuestas: apuestas.length, apuestas})
+        const opiniones = await OpinionModel.find({}).populate({path: 'usuarioId', select: 'email nombre apellido'});
+        res.json({totalOpiniones: opiniones.length, opiniones})
     }
 
     async eliminarOpinion(req, res) { // GET
