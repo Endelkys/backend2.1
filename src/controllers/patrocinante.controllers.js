@@ -1,3 +1,4 @@
+const { registrarAccion } = require('../helpers/registrarAccion')
 const { validarFormPatrocinante } = require('../helpers/validarForms/formulario.patrocinador')
 const PatrocinanteModel = require('../models/patrocinanteModel');
 
@@ -12,6 +13,12 @@ class Patrocinante {  // Estos controladores los hace Endelkys.
 
         const guardarPatrocinante = new PatrocinanteModel(datos);
         await guardarPatrocinante.save();
+        await registrarAccion({
+            metodoAccion: 'POST',
+            ruta: 'api/registrar-patrocinante',
+            descripcionAccion: 'Registrando patrocinante.',
+            usuarioId: req.id
+        });
         res.json({mensaje: 'Patrocinante registrado con exito.'})
     }
 

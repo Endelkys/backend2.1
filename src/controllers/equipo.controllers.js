@@ -1,3 +1,4 @@
+const { registrarAccion } = require('../helpers/registrarAccion')
 const { validarFormEquipo } = require('../helpers/validarForms/formulario.equipo')
 const EquipoModel = require('../models/equipoModel');
 const ModalidadModel = require('../models/modalidadModel');
@@ -21,11 +22,18 @@ class Equipo {  // Estos controladores los hace Luis.
         modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes.push(equipo);
         await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {categorias: modalidadEncontrada.categorias})
 
+        await registrarAccion({
+            metodoAccion: 'POST',
+            ruta: 'api/registrar-equipo',
+            descripcionAccion: `Registrando equipo: ${nombreEquipo}`,
+            usuarioId: req.id
+        });
+
         res.json({mensaje: `El equipo ha sido registrado y asignado a la categoria: ${nombreCategoria}.`})
     }
 
     async obtenerEquipos(req, res) {
-        const equiposAparticipar = await EquipoModel.find({});
+        const equiposAparticipar = await EquipoModel.find({});        
         res.json({equiposAparticipar}) 
     }
 
@@ -42,6 +50,12 @@ class Equipo {  // Estos controladores los hace Luis.
         modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes = [...equipoRemovido, datosActualizados]; // ponerle al array 'categorias' los datos que ya tiene sin el actuliazado + los datos del equipo actualizado
 
         await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {categorias: modalidadEncontrada.categorias}) // actualizar de una modalidad el equipo de una categoria       
+        await registrarAccion({
+            metodoAccion: 'PUT',
+            ruta: 'api/editar-equipo',
+            descripcionAccion: `Actualizando datos del equipo: ${nombreEquipo}`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'El equipo ha sido actualizado exitosamente.'});
     }
 
@@ -61,12 +75,24 @@ class Equipo {  // Estos controladores los hace Luis.
         modalidadEncontrada.categorias[indiceCategoria].equiposParticipantes = equipoRemovido; // ponerle al array 'categorias' los datos sin el equipo removido
 
         await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {categorias: modalidadEncontrada.categorias}) // removiendo en el documento      
+        await registrarAccion({
+            metodoAccion: 'PUT',
+            ruta: 'api/remover-equipo-de-categoria',
+            descripcionAccion: `Removiendo el equipo: ${nombreEquipo} de la categoria ${nombreCategoria}`,
+            usuarioId: req.id
+        });
         res.json({mensaje: `El equipo ${nombreEquipo} ha sido removido de la categoria: ${nombreCategoria}.`});
     }
 
     async eliminarEquipo(req, res) { // Eliminar permanentemente 
         const _id = req.params.id
         await EquipoModel.findByIdAndDelete({_id});
+        await registrarAccion({
+            metodoAccion: 'DELETE',
+            ruta: 'api/eliminar-equipo/:id',
+            descripcionAccion: `Se ha eliminado un equipo.`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'Equipo eliminado exitosamente'})
     }
 }

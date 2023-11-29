@@ -4,7 +4,7 @@ const HistorialAccionesModel = require('../models/historialAccionesModel');
 class Historial {
     async obtenerHistorialAcciones(req, res) { // GET
         const historialAcciones = await HistorialAccionesModel.find({}).populate({path: 'usuarioId', select: 'email nombre apellido'});
-        res.json({historialAcciones, req})
+        res.json({historialAcciones})
     }
 
     async obtenerHistorialAccionesByUsuario(req, res) { // brindar un control mas especifico de las acciones realizadas por un usuario.

@@ -1,3 +1,4 @@
+const { registrarAccion } = require('../helpers/registrarAccion')
 const { validarFormApuesta } = require('../helpers/validarForms/formulario.apuesta')
 const ApuestaModel = require('../models/apuestaModel');
 
@@ -12,6 +13,12 @@ class Apuesta {
         const guardarApuesta = new ApuestaModel(datosApuesta);
         await guardarApuesta.save(); // creando registro
 
+        await registrarAccion({
+            metodoAccion: 'POST',
+            ruta: 'api/crear-apuesta',
+            descripcionAccion: `Registro de apuesta.`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'La apuesta ha sido registrada con éxito, te deseamos suerte!'})
     }
 

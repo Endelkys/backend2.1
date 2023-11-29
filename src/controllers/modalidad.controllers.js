@@ -1,3 +1,4 @@
+const { registrarAccion } = require('../helpers/registrarAccion')
 const { validarFormModalidad } = require('../helpers/validarForms/formulario.modalidad')
 const ModalidadModel = require('../models/modalidadModel');
 
@@ -13,6 +14,12 @@ class Modalidad {  // Estos controladores los hace Miguel.
 
         const guardarModalidad = new ModalidadModel(datos);
         await guardarModalidad.save();
+        await registrarAccion({
+            metodoAccion: 'POST',
+            ruta: 'api/registrar-modalidad',
+            descripcionAccion: 'Registrando una nueva modalidad.',
+            usuarioId: req.id
+        });
         res.json({mensaje: 'Modalidad agregada con exito.'})
     }
 
@@ -26,7 +33,12 @@ class Modalidad {  // Estos controladores los hace Miguel.
         const {idModalidad, nombreCategoria} = req.body;
 
         await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {$push: {'categorias': {nombreCategoria}}});
-
+        await registrarAccion({
+            metodoAccion: 'POST',
+            ruta: 'api/agregar-categoria',
+            descripcionAccion: `Agregando una categoria.`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'La categoria fue asignada exitosamente.'})
     }
 
@@ -34,7 +46,12 @@ class Modalidad {  // Estos controladores los hace Miguel.
         const {idCategoria, nombreEditado} = req.body;
 
         await ModalidadModel.updateOne({'categorias._id': idCategoria}, {$set: {"categorias.$.nombreCategoria": nombreEditado}}) // Para actualizar un elemento del array de categorias
-        
+        await registrarAccion({
+            metodoAccion: 'PUT',
+            ruta: 'api/editar-categoria',
+            descripcionAccion: `Cambiando el nombre a la categoria con ID: ${idCategoria}`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'La categoria fue editada exitosamente.'})
     }    
       
@@ -61,7 +78,12 @@ class Modalidad {  // Estos controladores los hace Miguel.
         const { idCategoria, idModalidad } = req.body;
 
         await ModalidadModel.findByIdAndUpdate({_id: idModalidad}, {$pull: {categorias: {_id: idCategoria}}}) // Para remover un elemento del array de categorias
-        
+        await registrarAccion({
+            metodoAccion: 'DELETE',
+            ruta: 'api/eliminar-categoria',
+            descripcionAccion: `Eliminando categoria.`,
+            usuarioId: req.id
+        });
         res.json({mensaje: 'La categoria fue eliminada exitosamente.'})
     }
 }
