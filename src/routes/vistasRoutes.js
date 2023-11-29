@@ -63,6 +63,12 @@ router.get('/patrocinadores', async(req, res) => {
     res.render('patrocinadores', {patrocinantes: data.patrocinantes});
 });
 
+router.get('/historial', async(req, res) => { 
+    const {data} = await axios.get('http://localhost:3000/api/obtener-historial');
+    res.setHeader('Content-Type', 'text/html');
+    res.render('historial-acciones', {historialAcciones: data.historialAcciones});
+});
+
 router.get('/equipos', async(req, res) => { 
     const {data} = await axios.get('http://localhost:3000/api/obtener-equipos');
     res.setHeader('Content-Type', 'text/html');

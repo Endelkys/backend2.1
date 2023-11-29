@@ -7,7 +7,7 @@ const { rolesConAcceso } = require("../middlewares/validarRoles")
 //Estas rutas estan autorizadas unicamente para los admins, para brindar un control y orden del sistema.
 
 //Rutas con el metodo GET -- Para obtener registros.
-router.get('/obtener-historial', [verificarToken, rolesConAcceso(['admin'])], HistorialControllers.obtenerHistorialAcciones);
+router.get('/obtener-historial', HistorialControllers.obtenerHistorialAcciones);
 
 router.get('/obtener-historial-usuario/:id', [verificarToken, rolesConAcceso(['admin'])], HistorialControllers.obtenerHistorialAccionesByUsuario);
 
