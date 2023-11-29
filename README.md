@@ -27,6 +27,7 @@
 - Solamente el rol 'admin' puede crear registros de modalidad, categoria, patrocinador
 - Solamente el rol 'admin' puede eliminar categorias y equipos.
 - Solamente los roles 'admin' y 'editor' pueden editar una categoria
+- Solamente el rol 'admin' puede visualizar el historial de acciones
 
 - Si un rol de 'usuario' o 'editor' intenta hacer operaciones de 'admin' reciben un mensaje de error.
 
@@ -41,9 +42,27 @@ USER_DB=Endelkys
 PASSWORD_DB=secretkey
 SIGN_TOKEN=255393a4-aea4-e4b11fd80$2b$10$rnmX8lfseNvHytN1Q3s0z.SGU.nmnpNFEb/L4u72Zv5bB91mM/jMKc2df6080aa2d1d6e1e4e9484029-bb92
 
+
 Enviar el token en las peticiones que lo requieran
 
 En los Headers de la peticion marcar la propiedad Authorization y asignarle como valor => Bearer token
+
+
+// Tercera parte de la actividad | Proyecto
+
+- Se agrearon las 3 nuevas entidades que se pidió.
+
+- Entidad 1: ApuestaModel, creamos esta entidad para que todos los usuarios puedan apostar a su equipo favorito de una categoria y modalidad en especifica.
+
+- Entidad 2: OpinionModel, creamos esta entidad para que todos los usuarios puedan dejar su opinion y expectativa del torneo, de esta manera se puede medir el recibimiento y que tanto agradó al público. Además de poder saber que cosas se pueden mejorar para proximas ediciones.
+
+
+- Entidad 3: HistorialAccionesModel, creamos esta entidad para que unicamente los admins puedan tener un control y seguimiento de todas las acciones que se realicen en el sistema, como por ejemplo, eliminaciones, actualizaciones y registros.
+
+- Son un total de 10 interfaces las cuales interactuan con 10 endpoints.
+- Los demas endpoints se pueden probar perfectamente en thunderCLient.
+
+
 
 En ThunderClient colocar http://localhost:3000/api/ seguido de la ruta, 
 quedaria asi la primera http://localhost:3000/api/registrar-modalidad
