@@ -10,7 +10,6 @@ const verificarToken = async ( req, res, next ) => {
         if (!token) return res.status(400).json({ message: 'Accesso denegado, debes proporcionar el token.' });
 
         const decoded = jwt.verify(token, SIGN_TOKEN || 'secretKey');
-        console.log({decoded})
         const cuentaUsuario = await UsuarioModel.findById({_id: decoded.id});
         if( !cuentaUsuario?.token_session ) return res.status(400).json({ error: 'Acceso denegado, debes estar logeado.' });
       

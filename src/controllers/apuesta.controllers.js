@@ -16,11 +16,15 @@ class Apuesta {
     }
 
 
-    async obtenerApuestas(req, res) { // POST
-        const _id = req.params.id;
-        await UsuarioModel.findByIdAndUpdate({_id}, { $set: { token_session: '' }}) // remover el token.
+    async obtenerApuestas(req, res) { // GET
+        const apuestas = await ApuestaModel.find({}).populate({path: 'equipoId'}).populate({path: 'usuarioId', select: 'email nombre apellido'});
+        res.json({totalApuestas: apuestas.length, apuestas})
+    }
 
-        res.json({msg: 'Sesión cerrada con éxito.'})
+    async obtenerApuestasPorEquipo(req, res) { // GET
+        const id = req.params.id;
+        const apuestas = await ApuestaModel.find({equipoId: id}).populate({path: 'equipoId', select: 'nombreEquipo participantes'}).populate({path: 'usuarioId', select: 'email nombre apellido'});
+        res.json({totalApuestas: apuestas.length, apuestas})
     }
 }
 
