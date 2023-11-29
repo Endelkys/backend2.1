@@ -11,7 +11,7 @@ const opinionSchema = new Schema({
         type: String,
         trim: true,
     },
-    calificacion: { 
+    puntuacion: { 
         type: String,
         trim: true,
     },
