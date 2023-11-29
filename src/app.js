@@ -10,6 +10,7 @@ const EquipoRutas = require('./routes/equipoRutas');
 const UsuarioRutas = require('./routes/usuarioRutas');
 const ApuestaRutas = require('./routes/apuestaRutas');
 const OpinionRutas = require('./routes/opinionRutas');
+const HistorialRutas = require('./routes/historialRutas');
 const rutasPaginas = require('./routes/vistasRoutes')
 
 
@@ -30,6 +31,7 @@ app.use('/api', PatrocinanteRutas);
 app.use('/api', EquipoRutas);
 app.use('/api', ApuestaRutas);
 app.use('/api', UsuarioRutas);
+app.use('/api', HistorialRutas);
 app.use('/api', OpinionRutas);
 
 
