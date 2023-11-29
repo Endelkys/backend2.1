@@ -53,11 +53,21 @@ html(lang="en")
                 cursor: pointer;
                 font-weight: 500;
             }
+            .registroBtn {
+                color: #fff;
+                margin: .6rem 0;
+            }
+            .registroBtn > a {
+                color: #000;
+            }
     body                
         h2.titleContenedor Iniciar Sesion
         form#loginForm
             input(type='text' id='email' name='email' placeholder="Ingrese su correo") 
-            input(type='password' id='password' name='password' placeholder="Ingrese la contraseña")                                   
+            input(type='password' id='password' name='password' placeholder="Ingrese la contraseña")            
+
             button Guardar
+            p.registroBtn ¿ No tienes una cuenta ?  
+                a(href='registrarse') Registrarse
         script(src="./js/logicaFormularios.js")
          

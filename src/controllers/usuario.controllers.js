@@ -11,7 +11,7 @@ class Usuario {  // Estos controladores los hace Endelkys.
         if(respuestaError.error) return res.json(respuestaError);
 
         const checkExistingAccount = await UsuarioModel.findOne({email: datosUsario.email});
-        if(checkExistingAccount) return res.json({error: true, msg: 'El correo ya se encuentra en uso, prueba uno diferente.'})
+        if(checkExistingAccount) return res.json({error: true, mensaje: 'El correo ya se encuentra en uso, prueba uno diferente.'})
 
         const crearRegistro = new UsuarioModel(datosUsario);
         const token = generarToken(crearRegistro._id, crearRegistro.rol);
@@ -34,10 +34,10 @@ class Usuario {  // Estos controladores los hace Endelkys.
     async iniciarSesion(req, res) { // POST
         const datosUsario = req.body;
         const checkExistingAccount = await UsuarioModel.findOne({email: datosUsario.email});
-        if(!checkExistingAccount) return res.json({error: true, msg: 'Credenciales incorrectas.'});
+        if(!checkExistingAccount) return res.json({error: true, mensaje: 'Credenciales incorrectas.'});
 
         const matchPasswords = await compararPassword(datosUsario.password, checkExistingAccount.password); // comprobar si coinciden las claves
-        if(!matchPasswords) return res.json({error: true, msg: 'Credenciales incorrectas.'});
+        if(!matchPasswords) return res.json({error: true, mensaje: 'Credenciales incorrectas.'});
 
         const token = generarToken(checkExistingAccount._id, checkExistingAccount.rol); // generar token
         await UsuarioModel.findByIdAndUpdate({_id: checkExistingAccount._id}, { $set: { token_session: token } });

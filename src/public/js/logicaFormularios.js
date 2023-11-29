@@ -48,9 +48,8 @@ function obtenerValuesFormLogin () {
 async function registrarUsuario (e) {
     e.preventDefault();
     const resp = await fetch('http://localhost:3000/api/registrar-usuario', requestSettings(obtenerValuesFormUsuario()));
-    const {mensaje, msg, error, ...restDatos} = await resp.json()
-
-    if(error) return window.alert(msg);
+    const {mensaje, error, ...restDatos} = await resp.json()
+    if(error) return window.alert(mensaje);
 
     localStorage.setItem('usuario', JSON.stringify(restDatos));
     window.location.href = `/`;
@@ -59,9 +58,9 @@ async function registrarUsuario (e) {
 async function LoginFunction (e) {
     e.preventDefault();
     const resp = await fetch('http://localhost:3000/api/iniciar-sesion', requestSettings(obtenerValuesFormLogin()));
-    const {msg, error, ...restDatos} = await resp.json();
+    const {mensaje, error, ...restDatos} = await resp.json();
 
-    if(error) return window.alert(msg);
+    if(error) return window.alert(mensaje);
 
     localStorage.setItem('usuario', JSON.stringify(restDatos));
     window.location.href = `/`;

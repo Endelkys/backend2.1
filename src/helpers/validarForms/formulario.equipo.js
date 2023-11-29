@@ -1,25 +1,19 @@
 
 
-const validarFormEquipo = (idModalidad = '', nombreCategoria = '', nombreEquipo = '', participantes = '') => { 
-    const isError = { error: false, inputs: [] };
-    
+const validarFormEquipo = (idModalidad = '', nombreCategoria = '', nombreEquipo = '', participantes = '') => {     
     if(!idModalidad.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'idModalidad', msg: 'El ID de la modalidad es requerido.'})
+        return {error: true, mensaje: 'El ID de la modalidad es requerido.'};
     }
     if(!nombreCategoria.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'nombreCategoria', msg: 'El nombre de la categoria es requerido.'})
+        return {error: true, mensaje: 'El nombre de la categoria es requerido.'};
     }
     if(!nombreEquipo.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'nombreEquipo', msg: 'El nombre del equipo es requerido.'})
+        return {error: true, mensaje: 'El nombre del equipo es requerido.'};
     }  
     if(!participantes.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'participantes', msg: 'Los participantes del equipo es obligatorio.'})
+        return {error: true, mensaje: 'Los participantes del equipo es obligatorio.'};
     }    
-    return isError;
+    return {error: false}
 }
 
 module.exports = {

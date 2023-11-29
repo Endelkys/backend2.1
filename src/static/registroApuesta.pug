@@ -42,54 +42,69 @@ html(lang="en")
             }
             .containerRight > button:hover {
                 background: #babaf0;
-            }
-            .enlacesContenedor {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                margin-top: 2rem;
-            }
+            }      
+            .titlePage {
+                color: #fff;
+                font-size: 32px;
+                text-decoration: none;
+                font-weight: bold;
+            }      
             .titleContenedor {
                 color: #4949c6;
                 font-size: 35px;
                 margin-bottom: 1.2rem;
+                text-align: center;
+                margin-top: 2rem;
             }
-            .enlaces > a {
-                text-decoration: none;
-                margin-right: 8px;
-                border-radius: 8px;
-                padding: 10px;
+            form {
+                width: 450px;
+                padding: 8px;
                 background-color: #4949c6;
-                color: #fff;
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: auto;                
             }
-        script 
+            form > input {
+                outline: none;
+                padding: 12px;
+                width: 310px;
+                border: none;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+            }
+
+            form > button {
+                outline: none;
+                padding: 8px;
+                width: 90px;
+                border: none;
+                border-radius: 8px;
+                color:  #4949c6;
+                cursor: pointer;
+                font-weight: 500;
+            }
+        
         script(type='text/javascript').
             const checkRol = JSON.parse(localStorage.getItem('usuario'));
             if(!checkRol?.logeado) window.location.replace('/login');
 
+
     body 
         header#header   
             .navbar 
-                h1.titlePage Campeonato Robotica
+                a.titlePage(href='/') Campeonato Robotica
                 .containerRight
                     p   Bienvenido 
                         script document.write(checkRol.nombre)
-                    button#logoutBtn Cerrar sesion
-        .enlacesContenedor
-            h2.titleContenedor Registros
-            .enlaces 
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-modalidad'>Registrar Modalidad</a>`)
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-categoria'>Registrar Categoria</a>`)
-                a(href='registro-equipo') Registrar Equipo 
-                a(href='crear-apuesta') Crear Apuesta
-                script if(checkRol?.rol === 'admin') document.write(`<a href='registro-patrocinador'>Registrar Patrocinador</a>`)
-
-        .enlacesContenedor
-            h2.titleContenedor Contenido
-            .enlaces 
-                a(href='modalidades') Modalidades Registradas
-                a(href='patrocinadores') Patrocinadores Registrados
-
+                    button#logoutBtn Cerrar sesion          
+        h2.titleContenedor Crear apuesta
+        form(action='http://localhost:3000/api/registrar-equipo' method='post' target='_blank')
+            input#POST-name(type='text' required name='nombreModalidad' placeholder="A qué modalidad pertenece tu equipo favorito")
+            input#POST-name(type='text' required name='nombreCategoria' placeholder="A qué categoria pertenece tu equipo favorito")
+            input#POST-name(type='text' required name='nombreEquipo' placeholder="Ingresa el nombre del equipo ganador")
+            button Crear apuesta
         script(src="./js/logout.js")
-
+        
+         

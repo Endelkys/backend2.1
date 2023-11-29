@@ -1,12 +1,19 @@
 const { registrarAccion } = require('../helpers/registrarAccion')
 const { validarFormApuesta } = require('../helpers/validarForms/formulario.apuesta')
 const ApuestaModel = require('../models/apuestaModel');
-
+const EquipoModel = require('../models/equipoModel');
 
 
 class Apuesta {
     async crearApuesta(req, res) { // POST
         const datosApuesta = req.body;
+        datosApuesta.usuarioId = req.id;
+
+        const equipo = await EquipoModel.findOne({nombreEquipo: datos.nombreEquipo});
+
+        if(!equipo) return res.json({error: true, mensaje: 'Error: Equipo no encontrado!'})
+        datosApuesta.equipoId = equipo._id
+
         const respuestaError = validarFormApuesta(datosApuesta);
         if(respuestaError.error) return res.json(respuestaError);
 

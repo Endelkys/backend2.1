@@ -31,6 +31,11 @@ router.get('/registro-categoria', (req, res) => {
     res.render('registroCategoria');
 });
 
+router.get('/crear-apuesta', (req, res) => {
+    res.setHeader('Content-Type', 'text/html');
+    res.render('registroApuesta');
+});
+
 router.get('/registro-equipo', (req, res) => { 
     res.setHeader('Content-Type', 'text/html');
     res.render('registroEquipo');

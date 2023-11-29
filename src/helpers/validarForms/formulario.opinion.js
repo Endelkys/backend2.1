@@ -1,26 +1,20 @@
 const { checkMongoID } = require("../mongoID")
 
 
-const validarFormOpinion = ( datosOpinion ) => { 
-    const isError = { error: false, inputs: [] };
-    
+const validarFormOpinion = ( datosOpinion ) => {     
     if(!datosOpinion?.opinion?.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'opinion', msg: 'La opinión es requerida.'})
+        return {error: true, mensaje: 'La opinión es requerida.'};
     }
     if(!datosOpinion?.expectativa?.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'expectativa', msg: 'La expectativa es requerida.'})
+        return {error: true, mensaje: 'La expectativa es requerida.'};
     }
     if(!datosOpinion?.puntuacion?.length) {
-        isError.error = true;
-        isError.inputs.push({input: 'puntuacion', msg: 'La puntuacion es requerida.'})
+        return {error: true, mensaje: 'La puntuacion es requerida.'};
     }  
     if(!checkMongoID(datosOpinion.usuarioId)) {
-        isError.error = true;
-        isError.inputs.push({input: 'usuarioId', msg: 'Vaya.. parece que ID del usuario no tiene un formato correcto.'})
+        return {error: true, mensaje: 'Vaya.. parece que ID del usuario no tiene un formato correcto.'};
     }    
-    return isError;
+    return {error: false};
 }
 
 module.exports = {
